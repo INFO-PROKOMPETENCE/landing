@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { ContentContainer } from "../../components/shared/content-container";
 import { MainImage } from "../../components/shared/icons";
+import { Title } from "../../components/shared/title";
 import styles from "./MainPage.module.scss";
 
 export const MainPage: FC = () => {
@@ -22,6 +23,31 @@ export const MainPage: FC = () => {
             <button>Стать партнером</button>
           </div>
           <MainImage className={styles.image} />
+        </div>
+      </ContentContainer>
+      <ContentContainer>
+        <div className={styles.statisticContainer}>
+          <Title title="Статистика" />
+        </div>
+      </ContentContainer>
+      <ContentContainer>
+        <div className={styles.studentProjectsContainer}>
+          <Title title="Проекты наших студентов" />
+        </div>
+      </ContentContainer>
+      <ContentContainer>
+        <div className={styles.partnersContainer}>
+          <Title title="Партнеры" />
+        </div>
+      </ContentContainer>
+      <ContentContainer>
+        <div className={styles.feedbackContainer}>
+          <Title title="Отзывы" />
+        </div>
+      </ContentContainer>
+      <ContentContainer>
+        <div className={styles.howToBusiness}>
+          <Title title="Как стать партнером" />
         </div>
       </ContentContainer>
     </div>

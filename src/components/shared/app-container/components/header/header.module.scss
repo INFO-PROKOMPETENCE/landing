@@ -5,6 +5,8 @@
     width: 100%;
     background: #FFFFFF;
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    
     
     justify-content: center;
     
@@ -13,6 +15,9 @@
         max-width: $desktop-width;
         width: 100%;
         gap: 48px;
+        padding: 0 40px;
+        box-sizing: border-box;
+        
 
         @media screen and (max-width: $desktop-width) {
             max-width: $tablet-width;
