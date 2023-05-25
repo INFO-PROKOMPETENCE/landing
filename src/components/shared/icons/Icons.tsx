@@ -1,11 +1,13 @@
 import type { FC } from "react";
 import cx from "classnames";
 import logo from "./img/logo-for-light.svg";
+import mainImage from "./img/main-icon.svg";
 import styles from "./icons.module.scss";
 
 interface Props {
   isActive?: boolean;
   onClick?: () => void;
+  className?: string;
 }
 
 export const DirectoryIcon: FC<Props> = ({ isActive }) => {
@@ -32,4 +34,8 @@ export const DirectoryIcon: FC<Props> = ({ isActive }) => {
 
 export const LogoIcon: FC<Props> = ({ onClick }) => {
   return <img src={logo} alt="" onClick={onClick} />;
+};
+
+export const MainImage: FC<Props> = ({ className }) => {
+  return <img src={mainImage} alt="" className={className} />;
 };
