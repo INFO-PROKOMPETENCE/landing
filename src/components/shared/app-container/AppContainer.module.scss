@@ -1,0 +1,12 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    align-items: center;
+    background-color: #FFFFFF;
+    min-height: 100vh;
+    height: 100%;
+    padding-bottom: 64px;
+}

@@ -1,0 +1,14 @@
+@import '../../../../../styles/variables.scss';
+
+.main {
+    max-width: $desktop-width;
+    width: 100%;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    @media screen and (max-width: $desktop-width) {
+        max-width: $tablet-width;
+    }
+}
