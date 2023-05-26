@@ -3,6 +3,7 @@ import cx from "classnames";
 import logo from "./img/logo-for-light.svg";
 import mainImage from "./img/main-icon.svg";
 import tempChart from "./img/chart.svg";
+import tempProjPrev from "./img/temp-project-prev.svg";
 import styles from "./icons.module.scss";
 
 interface Props {
@@ -43,4 +44,8 @@ export const MainImage: FC<Props> = ({ className }) => {
 
 export const TempChart: FC<Props> = ({ className }) => {
   return <img src={tempChart} alt="" className={className} />;
+};
+
+export const TempProjectPreview: FC<Props> = ({ className }) => {
+  return <img src={tempProjPrev} alt="" className={className} />;
 };

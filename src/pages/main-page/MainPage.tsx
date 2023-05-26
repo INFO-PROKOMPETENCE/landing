@@ -1,6 +1,7 @@
 import { FC } from "react";
+import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { BoobleContainer } from "../../components/shared/booble-container";
-import { ContentContainer } from "../../components/shared/content-container";
 import { Divider } from "../../components/shared/divider";
 import { MainImage, TempChart } from "../../components/shared/icons";
 import { Title } from "../../components/shared/title";
@@ -8,12 +9,20 @@ import {
   STATISTICS_MOCK_DATA_INSTITUTES,
   STATISTICS_MOCK_DATA_SUMMARY,
 } from "../../mock/statiscticsMock";
+import { PROJECTS_MOCK } from "../../mock/projects";
+import { ProjectSlide } from "../../components/shared/project-slide";
+import { BlockContentContainer } from "../../components/shared/block-content-container";
 import styles from "./MainPage.module.scss";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 export const MainPage: FC = () => {
   return (
     <div className={styles.main}>
-      <ContentContainer>
+      <BlockContentContainer>
         <div className={styles.titleContainer}>
           <div className={styles.leftPart}>
             <div className={styles.text}>
@@ -30,8 +39,8 @@ export const MainPage: FC = () => {
           </div>
           <MainImage className={styles.image} />
         </div>
-      </ContentContainer>
-      <ContentContainer>
+      </BlockContentContainer>
+      <BlockContentContainer>
         <div className={styles.statisticContainer}>
           <Title title="Статистика" />
           <div className={styles.boobles}>
@@ -46,9 +55,8 @@ export const MainPage: FC = () => {
             <div className={styles.normalBooblesContainer}>
               {STATISTICS_MOCK_DATA_SUMMARY.map(
                 ({ title, caption, isActive }) => (
-                  <BoobleContainer isActive={isActive}>
+                  <BoobleContainer key={title + caption} isActive={isActive}>
                     <NormalBoobleContent
-                      key={title + caption}
                       title={title}
                       caption={caption!}
                     ></NormalBoobleContent>
@@ -62,27 +70,51 @@ export const MainPage: FC = () => {
             <button>Скачать в PNG</button>
           </div>
         </div>
-      </ContentContainer>
-      <ContentContainer>
+      </BlockContentContainer>
+      <BlockContentContainer>
         <div className={styles.studentProjectsContainer}>
           <Title title="Проекты наших студентов" />
+          <Swiper
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            centeredSlides
+            spaceBetween={150}
+            slidesPerView={1}
+            navigation
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log("slide change")}
+          >
+            {PROJECTS_MOCK.map(({ description, goal, icon, title }, index) => (
+              <SwiperSlide key={index}>
+                <ProjectSlide
+                  data={{
+                    description,
+                    goal,
+                    icon,
+                    title,
+                  }}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
-      </ContentContainer>
-      <ContentContainer>
+      </BlockContentContainer>
+      <BlockContentContainer>
         <div className={styles.partnersContainer}>
           <Title title="Партнеры" />
         </div>
-      </ContentContainer>
-      <ContentContainer>
+      </BlockContentContainer>
+      <BlockContentContainer>
         <div className={styles.feedbackContainer}>
           <Title title="Отзывы" />
         </div>
-      </ContentContainer>
-      <ContentContainer>
+      </BlockContentContainer>
+      <BlockContentContainer>
         <div className={styles.howToBusiness}>
           <Title title="Как стать партнером" />
         </div>
-      </ContentContainer>
+      </BlockContentContainer>
     </div>
   );
 };

@@ -1,0 +1,38 @@
+.main {
+    display: flex;
+    gap: 38px;
+    flex-shrink: 0;
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+
+        .title {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            .titleValue {
+                font-weight: 600;
+                font-size: 28px;
+                line-height: 34px;
+            }
+
+            .nameString {
+                font-size: 16px;
+                line-height: 20px;
+                color: #AAAAAA;
+            }
+        }
+
+        .text {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+
+            font-size: 20px;
+            line-height: 24px;
+        }
+    }
+}
