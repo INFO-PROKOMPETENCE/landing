@@ -109,6 +109,24 @@
             }
         }
     }
+
+    .studentProjectsContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+    }
+
+    .partnersContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+    }
+
+    .platform {
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+    }
 }
 
 .normalBooblesContentContainer {

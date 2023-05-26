@@ -1,9 +1,17 @@
 import { FC } from "react";
-import { A11y, Navigation, Pagination, Scrollbar } from "swiper";
+import { A11y, Navigation, Pagination, Scrollbar, Virtual } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { BoobleContainer } from "../../components/shared/booble-container";
 import { Divider } from "../../components/shared/divider";
-import { MainImage, TempChart } from "../../components/shared/icons";
+import {
+  MainImage,
+  MegaphoneLogo,
+  NaumenLogo,
+  PlatformImage,
+  SkblabLogo,
+  TempChart,
+  UcsbLogo,
+} from "../../components/shared/icons";
 import { Title } from "../../components/shared/title";
 import {
   STATISTICS_MOCK_DATA_INSTITUTES,
@@ -74,35 +82,69 @@ export const MainPage: FC = () => {
       <BlockContentContainer>
         <div className={styles.studentProjectsContainer}>
           <Title title="Проекты наших студентов" />
-          <Swiper
-            modules={[Navigation, Pagination, Scrollbar, A11y]}
-            centeredSlides
-            spaceBetween={150}
-            slidesPerView={1}
-            navigation
-            pagination={{ clickable: true }}
-            scrollbar={{ draggable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log("slide change")}
-          >
-            {PROJECTS_MOCK.map(({ description, goal, icon, title }, index) => (
-              <SwiperSlide key={index}>
-                <ProjectSlide
-                  data={{
-                    description,
-                    goal,
-                    icon,
-                    title,
-                  }}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <div>
+            <Swiper
+              modules={[Navigation, Pagination, A11y]}
+              centeredSlides
+              loop
+              spaceBetween={48}
+              watchOverflow
+              slidesPerView={1.5}
+              navigation
+              pagination={{ clickable: true }}
+            >
+              {PROJECTS_MOCK.map(
+                ({ description, goal, icon, title }, index) => (
+                  <SwiperSlide key={index + title}>
+                    <ProjectSlide
+                      data={{
+                        description,
+                        goal,
+                        icon,
+                        title,
+                      }}
+                    />
+                  </SwiperSlide>
+                )
+              )}
+            </Swiper>
+          </div>
         </div>
       </BlockContentContainer>
       <BlockContentContainer>
         <div className={styles.partnersContainer}>
           <Title title="Партнеры" />
+          <div>
+            <Swiper
+              modules={[Navigation, Pagination, A11y]}
+              loop
+              spaceBetween={48}
+              watchOverflow
+              slidesPerView={3}
+              navigation
+              autoplay={{ delay: 10 }}
+              pagination={{ clickable: true }}
+            >
+              <SwiperSlide>
+                <NaumenLogo />
+              </SwiperSlide>
+              <SwiperSlide>
+                <SkblabLogo />
+              </SwiperSlide>
+              <SwiperSlide>
+                <MegaphoneLogo />
+              </SwiperSlide>
+              <SwiperSlide>
+                <UcsbLogo />
+              </SwiperSlide>
+            </Swiper>
+          </div>
+        </div>
+      </BlockContentContainer>
+      <BlockContentContainer>
+        <div className={styles.platform}>
+          <Title title="Платформа" />
+          <PlatformImage />
         </div>
       </BlockContentContainer>
       <BlockContentContainer>

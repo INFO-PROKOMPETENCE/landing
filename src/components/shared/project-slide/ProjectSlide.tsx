@@ -11,7 +11,7 @@ export const ProjectSlide: FC<Props> = ({
   data: { description, goal, icon, title },
 }) => {
   return (
-    <ContentContainer>
+    <ContentContainer width={800}>
       <div className={styles.main}>
         {icon}
         <div className={styles.content}>
