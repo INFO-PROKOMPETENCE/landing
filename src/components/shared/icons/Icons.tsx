@@ -2,6 +2,7 @@ import type { FC } from "react";
 import cx from "classnames";
 import logo from "./img/logo-for-light.svg";
 import mainImage from "./img/main-icon.svg";
+import tempChart from "./img/chart.svg";
 import styles from "./icons.module.scss";
 
 interface Props {
@@ -38,4 +39,8 @@ export const LogoIcon: FC<Props> = ({ onClick }) => {
 
 export const MainImage: FC<Props> = ({ className }) => {
   return <img src={mainImage} alt="" className={className} />;
+};
+
+export const TempChart: FC<Props> = ({ className }) => {
+  return <img src={tempChart} alt="" className={className} />;
 };

@@ -1,0 +1,17 @@
+.main {
+    background: #FFFFFF;
+    border-radius: 32px;
+    display: flex;
+    width: fit-content;
+
+    &.active {
+        background: #D2E6F5;
+    }
+
+    &.small {
+        padding: 12px 26px;
+    }
+    &.normal {
+        padding: 24px 52px;
+    }
+}
