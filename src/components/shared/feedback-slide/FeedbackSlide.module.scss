@@ -1,0 +1,35 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .header {
+        display: flex;
+        gap: 20px;
+
+        .avatar {
+            width: 70px;
+            height: 70px;
+            background: #D9D9D9;
+            border-radius: 20px;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            .name {
+                font-weight: 600;
+                font-size: 24px;
+                line-height: 29px;
+            }
+
+            .job {
+                font-size: 16px;
+                line-height: 20px;
+                color: #AAAAAA;
+            }
+        }
+    }
+}

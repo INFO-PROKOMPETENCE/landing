@@ -26,6 +26,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { FEEDBACK } from "../../mock/feedbackMock";
+import { FeedbackSlide } from "../../components/shared/feedback-slide";
 
 export const MainPage: FC = () => {
   return (
@@ -150,6 +152,23 @@ export const MainPage: FC = () => {
       <BlockContentContainer>
         <div className={styles.feedbackContainer}>
           <Title title="Отзывы" />
+          <div>
+            <Swiper
+              modules={[Navigation, Pagination, A11y]}
+              loop
+              centeredSlidesBounds
+              spaceBetween={24}
+              slidesPerView={2}
+              navigation
+              pagination={{ clickable: true }}
+            >
+              {FEEDBACK.map(({ job, name, value }, index) => (
+                <SwiperSlide key={index}>
+                  <FeedbackSlide job={job} name={name} value={value} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       </BlockContentContainer>
       <BlockContentContainer>
