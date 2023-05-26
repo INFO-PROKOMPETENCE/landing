@@ -3,6 +3,7 @@ import { useLocation } from "react-router";
 import { useNavigate } from "react-router";
 import { ContentAppContainer } from "./components/content-app-container/ContentAppContainer";
 import { Header } from "./components/header";
+import { Footer } from "./components/footer";
 import styles from "./AppContainer.module.scss";
 
 const routes: { [key: number | string]: string } = {
@@ -44,6 +45,7 @@ export const AppContainer: FC<PropsWithChildren> = ({ children }) => {
         onClickLogo={onCLickLogo}
       />
       <ContentAppContainer>{children}</ContentAppContainer>
+      <Footer />
     </div>
   );
 };

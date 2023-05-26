@@ -1,0 +1,65 @@
+@import '../../../../../styles/variables.scss';
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    
+
+    .footerLineContainer {
+        height: 64px;
+        display: flex;
+        background: #FFFFFF;
+        justify-content: center;
+        align-items: center;
+
+        .footerLine {
+            max-width: $desktop-width;
+            width: 100%;
+            padding: 0 40px;
+            box-sizing: border-box;
+
+            @media screen and (max-width: $desktop-width) {
+                max-width: $tablet-width;
+            }
+        }
+    }
+
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+
+            max-width: $desktop-width;
+            width: 100%;
+            padding: 0 40px;
+            box-sizing: border-box;
+
+            @media screen and (max-width: $desktop-width) {
+                max-width: $tablet-width;
+            }
+        }
+        
+        .hrefs {
+            display: flex;
+            gap: 44px;
+
+            a {
+                color: #3467F4;
+            }
+        }
+
+        .caption {
+            font-size: 14px;
+            line-height: 22px;
+            color: #AAAAAA;
+        }
+    }
+
+}
