@@ -28,6 +28,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { FEEDBACK } from "../../mock/feedbackMock";
 import { FeedbackSlide } from "../../components/shared/feedback-slide";
+import { StepsContainer } from "../../components/shared/steps-container";
 
 export const MainPage: FC = () => {
   return (
@@ -174,6 +175,7 @@ export const MainPage: FC = () => {
       <BlockContentContainer>
         <div className={styles.howToBusiness}>
           <Title title="Как стать партнером" />
+          <StepsContainer />
         </div>
       </BlockContentContainer>
     </div>
