@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { A11y, Navigation, Pagination, Scrollbar, Virtual } from "swiper";
+import { FC, useRef } from "react";
+import { A11y, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { BoobleContainer } from "../../components/shared/booble-container";
 import { Divider } from "../../components/shared/divider";
@@ -28,9 +28,14 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { FEEDBACK } from "../../mock/feedbackMock";
 import { FeedbackSlide } from "../../components/shared/feedback-slide";
-import { StepsContainer } from "../../components/shared/steps-container";
+import { GoogleForm } from "../../components/shared/google-form";
 
 export const MainPage: FC = () => {
+  const googleForm = useRef<HTMLDivElement>(null);
+  const moveToForm = () => {
+    googleForm?.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className={styles.main}>
       <BlockContentContainer>
@@ -46,7 +51,7 @@ export const MainPage: FC = () => {
                 ключевой технологии
               </div>
             </div>
-            <button>Стать партнером</button>
+            <button onClick={moveToForm}>Стать партнером</button>
           </div>
           <MainImage className={styles.image} />
         </div>
@@ -173,9 +178,9 @@ export const MainPage: FC = () => {
         </div>
       </BlockContentContainer>
       <BlockContentContainer>
-        <div className={styles.howToBusiness}>
+        <div className={styles.howToBusiness} ref={googleForm}>
           <Title title="Как стать партнером" />
-          <StepsContainer />
+          <GoogleForm />
         </div>
       </BlockContentContainer>
     </div>
