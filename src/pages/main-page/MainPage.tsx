@@ -1,4 +1,4 @@
-import { FC, useRef } from "react";
+import { FC, useCallback, useRef } from "react";
 import { A11y, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { BoobleContainer } from "../../components/shared/booble-container";
@@ -9,7 +9,6 @@ import {
   NaumenLogo,
   PlatformImage,
   SkblabLogo,
-  TempChart,
   UcsbLogo,
 } from "../../components/shared/icons";
 import { Title } from "../../components/shared/title";
@@ -29,11 +28,45 @@ import "swiper/css/scrollbar";
 import { FEEDBACK } from "../../mock/feedbackMock";
 import { FeedbackSlide } from "../../components/shared/feedback-slide";
 import { GoogleForm } from "../../components/shared/google-form";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  ChartData,
+  Legend,
+  LinearScale,
+  Tooltip,
+  Title as ChartTitle,
+} from "chart.js";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  ChartTitle,
+  Tooltip,
+  Legend
+);
+
+const labels = ["2017", "2017", "2018", "2019", "2020", "2021", "2022", "2023"];
 
 export const MainPage: FC = () => {
   const googleForm = useRef<HTMLDivElement>(null);
-  const moveToForm = () => {
+
+  const moveToForm = useCallback(() => {
     googleForm?.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
+  const data: ChartData<"bar", (number | [number, number] | null)[]> = {
+    labels: labels,
+    datasets: [
+      {
+        data: labels.map(() => Math.random() * 1000),
+        backgroundColor: "#D2E6F5",
+        barPercentage: 0.6,
+      },
+    ],
   };
 
   return (
@@ -82,7 +115,63 @@ export const MainPage: FC = () => {
             </div>
           </div>
           <div className={styles.chartContainer}>
-            <TempChart />
+            <div className={styles.chart}>
+              <div className={styles.chartTitle}>
+                Количество студентов в ИРИТ-РТФ
+              </div>
+              <Bar
+                options={{
+                  responsive: true,
+                  plugins: {
+                    legend: {
+                      display: false,
+                    },
+                    tooltip: {
+                      backgroundColor: "#AAAAAA",
+                      titleColor: "#FFFFFF",
+                      yAlign: "bottom" as const,
+                      titleAlign: "center",
+                      padding: { x: 20, y: 10 },
+                      callbacks: {
+                        title: (data) => {
+                          return (data[0].raw as number).toFixed(0);
+                        },
+                        label: () => "",
+                      },
+                    },
+                  },
+                  scales: {
+                    x: {
+                      grid: {
+                        display: false,
+                      },
+                      ticks: {
+                        color: "#AAAAAA",
+                        autoSkipPadding: 60,
+                        font: {
+                          size: 20,
+                        },
+                        padding: 20,
+                      },
+                    },
+                    y: {
+                      grid: {
+                        display: false,
+                      },
+                      ticks: {
+                        color: "#000000",
+                        autoSkipPadding: 60,
+                        font: {
+                          size: 20,
+                        },
+                        padding: 20,
+                      },
+                    },
+                  },
+                }}
+                data={data}
+              />
+            </div>
             <button>Скачать в PNG</button>
           </div>
         </div>
