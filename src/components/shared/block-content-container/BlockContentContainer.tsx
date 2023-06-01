@@ -1,6 +1,17 @@
 import { FC, PropsWithChildren } from "react";
 import styles from "./BlockContentContainer.module.scss";
 
-export const BlockContentContainer: FC<PropsWithChildren> = ({ children }) => {
-  return <div className={styles.main}>{children}</div>;
+interface Props {
+  href?: string;
+}
+
+export const BlockContentContainer: FC<PropsWithChildren<Props>> = ({
+  children,
+  href,
+}) => {
+  return (
+    <div id={href} className={styles.main}>
+      {children}
+    </div>
+  );
 };

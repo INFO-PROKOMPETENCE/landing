@@ -14,8 +14,12 @@ export const Header: FC<Props> = ({ activeTab, changeTab, onClickLogo }) => {
       <div className={styles.container}>
         <LogoIcon onClick={onClickLogo} />
         <div className={styles.tabs}>
-          <div>Каталог</div>
-          <div>Мой проект</div>
+          <a href="#stat">Статистика</a>
+          <a href="#projects">Проекты</a>
+          <a href="#partners">Партнеры</a>
+          <a href="#platform">Платформа</a>
+          <a href="#feedback">Отзывы</a>
+          <a href="#business">Как стать партнером</a>
         </div>
       </div>
     </div>

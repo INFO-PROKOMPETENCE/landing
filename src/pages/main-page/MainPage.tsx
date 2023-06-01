@@ -89,7 +89,7 @@ export const MainPage: FC = () => {
           <MainImage className={styles.image} />
         </div>
       </BlockContentContainer>
-      <BlockContentContainer>
+      <BlockContentContainer href="stat">
         <div className={styles.statisticContainer}>
           <Title title="Статистика" />
           <div className={styles.boobles}>
@@ -176,7 +176,7 @@ export const MainPage: FC = () => {
           </div>
         </div>
       </BlockContentContainer>
-      <BlockContentContainer>
+      <BlockContentContainer href="projects">
         <div className={styles.studentProjectsContainer}>
           <Title title="Проекты наших студентов" />
           <div>
@@ -208,7 +208,7 @@ export const MainPage: FC = () => {
           </div>
         </div>
       </BlockContentContainer>
-      <BlockContentContainer>
+      <BlockContentContainer href="partners">
         <div className={styles.partnersContainer}>
           <Title title="Партнеры" />
           <div>
@@ -238,13 +238,13 @@ export const MainPage: FC = () => {
           </div>
         </div>
       </BlockContentContainer>
-      <BlockContentContainer>
+      <BlockContentContainer href="platform">
         <div className={styles.platform}>
           <Title title="Платформа" />
           <PlatformImage />
         </div>
       </BlockContentContainer>
-      <BlockContentContainer>
+      <BlockContentContainer href="feedback">
         <div className={styles.feedbackContainer}>
           <Title title="Отзывы" />
           <div>
@@ -266,7 +266,7 @@ export const MainPage: FC = () => {
           </div>
         </div>
       </BlockContentContainer>
-      <BlockContentContainer>
+      <BlockContentContainer href="business">
         <div className={styles.howToBusiness} ref={googleForm}>
           <Title title="Как стать партнером" />
           <GoogleForm />
