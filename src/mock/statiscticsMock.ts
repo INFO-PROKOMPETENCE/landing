@@ -22,6 +22,7 @@ export const STATISTICS_MOCK_DATA_INSTITUTES: StatisticsData[] = [
     title: "ИНМИТ",
   },
 ];
+
 export const STATISTICS_MOCK_DATA_SUMMARY: StatisticsData[] = [
   {
     title: "1008",

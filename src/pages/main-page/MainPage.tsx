@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback, useRef } from "react";
 import { A11y, Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { BoobleContainer } from "../../components/shared/booble-container";
@@ -34,13 +34,15 @@ import {
   Tooltip,
   Title as ChartTitle,
 } from "chart.js";
+//@ts-ignore
+import { useScreenshot } from "use-react-screenshot";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 import styles from "./MainPage.module.scss";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import AnchorLink from "react-anchor-link-smooth-scroll";
 
 ChartJS.register(
   CategoryScale,
@@ -53,6 +55,8 @@ ChartJS.register(
 
 export const MainPage: FC = () => {
   const [chartManager, setChartManager] = useChartManager();
+  const [_, takeScreenshot] = useScreenshot();
+  const chartRef = useRef<HTMLDivElement>(null);
 
   const data: ChartData<"bar", (number | [number, number] | null)[]> = {
     labels: chartManager.labels,
@@ -76,6 +80,25 @@ export const MainPage: FC = () => {
       instituteName: chartManager.instituteName,
       statisticItemName: value,
     });
+
+  const makeChartScreenshot = useCallback(
+    async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      if (chartRef.current) {
+        const button = event.target as HTMLButtonElement;
+        button.hidden = true;
+
+        const screenBlob = await takeScreenshot(chartRef.current);
+
+        const aEl = document.createElement("a");
+        aEl.href = screenBlob;
+        aEl.download = `Количество_${chartManager.statisticItemName}_в_${chartManager.instituteName}.png`;
+        aEl.click();
+
+        button.hidden = false;
+      }
+    },
+    [chartManager.instituteName, chartManager.statisticItemName, takeScreenshot]
+  );
 
   return (
     <div className={styles.main}>
@@ -136,7 +159,7 @@ export const MainPage: FC = () => {
               ))}
             </div>
           </div>
-          <div className={styles.chartContainer}>
+          <div className={styles.chartContainer} ref={chartRef}>
             <div className={styles.chart}>
               <div className={styles.chartTitle}>
                 {`Количество ${chartManager.statisticItemName} в ${chartManager.instituteName}`}
@@ -194,7 +217,7 @@ export const MainPage: FC = () => {
                 data={data}
               />
             </div>
-            <button>Скачать в PNG</button>
+            <button onClick={makeChartScreenshot}>Скачать в PNG</button>
           </div>
         </div>
       </BlockContentContainer>
