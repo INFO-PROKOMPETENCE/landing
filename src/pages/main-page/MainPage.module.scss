@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 64px;
+  position: relative;
 
   .titleContainer {
     margin-top: 120px;
@@ -151,6 +152,32 @@
     display: flex;
     flex-direction: column;
     gap: 36px;
+    position: relative;
+
+    .navigateButton {
+      position: absolute;
+      top: 60%;
+      z-index: 10;
+      width: 35px;
+      height: 35px;
+      border: none;
+      border-radius: 50%;
+
+      background: url("../../components/shared/icons/img/arrow-left.svg") 50%
+        50% no-repeat;
+
+      background-color: #ffffff;
+      cursor: pointer;
+
+      &.prev {
+        left: -51px;
+      }
+
+      &.next {
+        right: 0px;
+        rotate: 180deg;
+      }
+    }
   }
 
   .howToBusiness {

@@ -23,6 +23,7 @@ import { FEEDBACK } from "../../mock/feedbackMock";
 import { FeedbackSlide } from "../../components/shared/feedback-slide";
 import { GoogleForm } from "../../components/shared/google-form";
 import { Bar } from "react-chartjs-2";
+import cx from "classnames";
 import {
   Chart as ChartJS,
   BarElement,
@@ -292,9 +293,12 @@ export const MainPage: FC = () => {
               modules={[Navigation, Pagination, A11y]}
               loop
               centeredSlidesBounds
-              spaceBetween={24}
+              // spaceBetween={24}
               slidesPerView={2}
-              navigation
+              navigation={{
+                prevEl: `.${styles.prev}`,
+                nextEl: `.${styles.next}`,
+              }}
               pagination={{ clickable: true }}
             >
               {FEEDBACK.map(({ job, name, value }, index) => (
@@ -303,6 +307,8 @@ export const MainPage: FC = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
+            <button className={cx(styles.navigateButton, styles.prev)} />
+            <button className={cx(styles.navigateButton, styles.next)} />
           </div>
         </div>
       </BlockContentContainer>
