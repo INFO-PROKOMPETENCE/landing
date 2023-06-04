@@ -26,7 +26,7 @@ export const LogoIcon: FC<Props> = ({ onClick }) => {
 };
 
 export const MainImage: FC<Props> = ({ className }) => {
-  return <img src={mainImage} alt="" className={className} />;
+  return <img src={mainImage} alt="" className={className} draggable={false} />;
 };
 
 export const TempChart: FC<Props> = ({ className }) => {

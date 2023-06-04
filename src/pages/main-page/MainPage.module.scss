@@ -134,6 +134,41 @@
     display: flex;
     flex-direction: column;
     gap: 36px;
+
+    .navigation {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 44px;
+      margin-top: 34px;
+
+      .paginationContainer {
+        display: flex;
+        gap: 32px;
+        justify-content: center;
+        width: fit-content;
+      }
+
+      .navigateButton {
+        width: 35px;
+        height: 35px;
+        border: none;
+        border-radius: 50%;
+
+        background: url("../../components/shared/icons/img/arrow-left.svg") 50%
+          50% no-repeat;
+
+        background-color: #ffffff;
+        cursor: pointer;
+
+        &.prev {
+        }
+
+        &.next {
+          rotate: 180deg;
+        }
+      }
+    }
   }
 
   .partnersContainer {
@@ -171,7 +206,7 @@
 
     .navigateButton {
       position: absolute;
-      top: 60%;
+      top: 50%;
       z-index: 10;
       width: 35px;
       height: 35px;
@@ -192,6 +227,13 @@
         right: 0px;
         rotate: 180deg;
       }
+    }
+
+    .paginationContainer {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      margin-top: 28px;
     }
   }
 

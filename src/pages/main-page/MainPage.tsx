@@ -44,6 +44,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
+import "./slider.css";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -232,8 +234,18 @@ export const MainPage: FC = () => {
               spaceBetween={48}
               watchOverflow
               slidesPerView={1.5}
-              navigation
-              pagination={{ clickable: true }}
+              navigation={{
+                prevEl: `.${styles.prev}`,
+                nextEl: `.${styles.next}`,
+              }}
+              pagination={{
+                clickable: true,
+                type: "bullets",
+                el: "#project-pagination",
+                renderBullet: (index, className) => {
+                  return `<button class="${className} custom-pagination"></button>`;
+                },
+              }}
               speed={500}
             >
               {PROJECTS_MOCK.map(
@@ -251,6 +263,14 @@ export const MainPage: FC = () => {
                 )
               )}
             </Swiper>
+            <div className={styles.navigation}>
+              <button className={cx(styles.navigateButton, styles.prev)} />
+              <div
+                className={styles.paginationContainer}
+                id="project-pagination"
+              />
+              <button className={cx(styles.navigateButton, styles.next)} />
+            </div>
           </div>
         </div>
       </BlockContentContainer>
@@ -329,7 +349,13 @@ export const MainPage: FC = () => {
                 prevEl: `.${styles.prev}`,
                 nextEl: `.${styles.next}`,
               }}
-              pagination={{ clickable: true }}
+              pagination={{
+                clickable: true,
+                el: "#feedback-pagination",
+                renderBullet: (index, className) => {
+                  return `<button class="${className} custom-pagination"></button>`;
+                },
+              }}
             >
               {FEEDBACK.map(({ job, name, value }, index) => (
                 <SwiperSlide key={index}>
@@ -337,6 +363,10 @@ export const MainPage: FC = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
+            <div
+              className={styles.paginationContainer}
+              id="feedback-pagination"
+            />
             <button className={cx(styles.navigateButton, styles.prev)} />
             <button className={cx(styles.navigateButton, styles.next)} />
           </div>
