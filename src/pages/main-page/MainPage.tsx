@@ -1,4 +1,4 @@
-import { FC, useCallback, useRef } from "react";
+import { FC } from "react";
 import { A11y, Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { BoobleContainer } from "../../components/shared/booble-container";
@@ -40,6 +40,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 
 ChartJS.register(
   CategoryScale,
@@ -51,12 +52,6 @@ ChartJS.register(
 );
 
 export const MainPage: FC = () => {
-  const googleForm = useRef<HTMLDivElement>(null);
-
-  const moveToForm = useCallback(() => {
-    googleForm?.current?.scrollIntoView({ behavior: "smooth" });
-  }, []);
-
   const [chartManager, setChartManager] = useChartManager();
 
   const data: ChartData<"bar", (number | [number, number] | null)[]> = {
@@ -97,7 +92,9 @@ export const MainPage: FC = () => {
                 ключевой технологии
               </div>
             </div>
-            <button onClick={moveToForm}>Стать партнером</button>
+            <AnchorLink offset={40} href="#business">
+              Стать партнером
+            </AnchorLink>
           </div>
           <MainImage className={styles.image} />
         </div>
@@ -323,7 +320,7 @@ export const MainPage: FC = () => {
         </div>
       </BlockContentContainer>
       <BlockContentContainer href="business">
-        <div className={styles.howToBusiness} ref={googleForm}>
+        <div className={styles.howToBusiness}>
           <Title title="Как стать партнером" />
           <GoogleForm />
         </div>
