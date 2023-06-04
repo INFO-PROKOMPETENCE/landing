@@ -214,6 +214,7 @@ export const MainPage: FC = () => {
               slidesPerView={1.5}
               navigation
               pagination={{ clickable: true }}
+              speed={500}
             >
               {PROJECTS_MOCK.map(
                 ({ description, goal, icon, title }, index) => (
@@ -238,26 +239,34 @@ export const MainPage: FC = () => {
           <Title title="Партнеры" />
           <div>
             <Swiper
-              modules={[Navigation, Pagination, A11y]}
+              modules={[Navigation, Pagination, A11y, Autoplay]}
               loop
-              spaceBetween={48}
-              watchOverflow
+              spaceBetween={96}
+              centeredSlides
               slidesPerView={3}
-              navigation
-              autoplay={{ delay: 10 }}
-              pagination={{ clickable: true }}
+              loopedSlides={2}
+              autoplay={{ delay: 2000, disableOnInteraction: false }}
+              speed={800}
             >
               <SwiperSlide>
-                <NaumenLogo />
+                <div className={styles.slide}>
+                  <NaumenLogo className={styles.logoSlide} />
+                </div>
               </SwiperSlide>
               <SwiperSlide>
-                <SkblabLogo />
+                <div className={styles.slide}>
+                  <SkblabLogo className={styles.logoSlide} />
+                </div>
               </SwiperSlide>
               <SwiperSlide>
-                <MegaphoneLogo />
+                <div className={styles.slide}>
+                  <MegaphoneLogo className={styles.logoSlide} />
+                </div>
               </SwiperSlide>
               <SwiperSlide>
-                <UcsbLogo />
+                <div className={styles.slide}>
+                  <UcsbLogo className={styles.logoSlide} />
+                </div>
               </SwiperSlide>
             </Swiper>
           </div>
@@ -271,6 +280,7 @@ export const MainPage: FC = () => {
               modules={[Autoplay]}
               loop
               autoplay={{ delay: 4000, disableOnInteraction: false }}
+              speed={800}
             >
               <SwiperSlide>
                 <PlatformFirstScreen className={styles.platformSlide} />
