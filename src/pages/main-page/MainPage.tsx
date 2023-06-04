@@ -1,13 +1,15 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react";
-import { A11y, Navigation, Pagination } from "swiper";
+import { FC, useCallback, useRef } from "react";
+import { A11y, Autoplay, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { BoobleContainer } from "../../components/shared/booble-container";
 import { Divider } from "../../components/shared/divider";
 import {
-  getNextScreen,
   MainImage,
   MegaphoneLogo,
   NaumenLogo,
+  PlatformFirstScreen,
+  PlatformSecondScreen,
+  PlatformThirdScreen,
   SkblabLogo,
   UcsbLogo,
 } from "../../components/shared/icons";
@@ -15,12 +17,8 @@ import { Title } from "../../components/shared/title";
 import { PROJECTS_MOCK } from "../../mock/projects";
 import { ProjectSlide } from "../../components/shared/project-slide";
 import { BlockContentContainer } from "../../components/shared/block-content-container";
-import styles from "./MainPage.module.scss";
-
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+import statistic, { Institute } from "../../settings/statistic";
+import { useChartManager } from "../../utils/use-chart-manager";
 import { FEEDBACK } from "../../mock/feedbackMock";
 import { FeedbackSlide } from "../../components/shared/feedback-slide";
 import { GoogleForm } from "../../components/shared/google-form";
@@ -35,8 +33,12 @@ import {
   Tooltip,
   Title as ChartTitle,
 } from "chart.js";
-import statistic, { Institute } from '../../settings/statistic';
-import { useChartManager } from '../../utils/use-chart-manager';
+import styles from "./MainPage.module.scss";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 ChartJS.register(
   CategoryScale,
@@ -67,23 +69,17 @@ export const MainPage: FC = () => {
     ],
   };
 
-  const onSetInstituteName = (institute: Institute) => setChartManager({
-    instituteName: institute.name,
-    statisticItemName: Object.keys(institute.data)[0],
-  });
+  const onSetInstituteName = (institute: Institute) =>
+    setChartManager({
+      instituteName: institute.name,
+      statisticItemName: Object.keys(institute.data)[0],
+    });
 
-  const onSetStatisticItemName = (value: string) => setChartManager({
-    instituteName: chartManager.instituteName,
-    statisticItemName: value,
-  });
-
-  const [screen, setScreen] = useState(getNextScreen(-1));
-  useEffect(() => {
-    let screenNumber = 0;
-    setInterval(() => {;
-      setScreen(getNextScreen(++screenNumber));
-    }, 3000);
-  }, [])
+  const onSetStatisticItemName = (value: string) =>
+    setChartManager({
+      instituteName: chartManager.instituteName,
+      statisticItemName: value,
+    });
 
   return (
     <div className={styles.main}>
@@ -110,33 +106,42 @@ export const MainPage: FC = () => {
           <Title title="Статистика" />
           <div className={styles.boobles}>
             <div className={styles.smallBooblesContainer}>
-              {statistic.institutes.map(institute => (
-                  <div key={institute.name} onClick={() => onSetInstituteName(institute)}>
-                    <BoobleContainer isActive={institute.name === chartManager.instituteName}>
-                      {institute.name}
-                    </BoobleContainer>
-                  </div>
+              {statistic.institutes.map((institute) => (
+                <div
+                  key={institute.name}
+                  onClick={() => onSetInstituteName(institute)}
+                >
+                  <BoobleContainer
+                    isActive={institute.name === chartManager.instituteName}
+                  >
+                    {institute.name}
+                  </BoobleContainer>
+                </div>
               ))}
             </div>
             <Divider />
             <div className={styles.normalBooblesContainer}>
               {chartManager.statisticItems.map((item) => (
-                  <div key={item.title + item.count} onClick={() => onSetStatisticItemName(item.title)}>
-                    <BoobleContainer  isActive={item.title === chartManager.statisticItemName}>
-                      <NormalBoobleContent
-                        title={item.count.toString()}
-                        caption={item.title}
-                      ></NormalBoobleContent>
-                    </BoobleContainer>
-                  </div>
-                )
-              )}
+                <div
+                  key={item.title + item.count}
+                  onClick={() => onSetStatisticItemName(item.title)}
+                >
+                  <BoobleContainer
+                    isActive={item.title === chartManager.statisticItemName}
+                  >
+                    <NormalBoobleContent
+                      title={item.count.toString()}
+                      caption={item.title}
+                    ></NormalBoobleContent>
+                  </BoobleContainer>
+                </div>
+              ))}
             </div>
           </div>
           <div className={styles.chartContainer}>
             <div className={styles.chart}>
               <div className={styles.chartTitle}>
-                { 'Количество ' + chartManager.statisticItemName + ' в ' + chartManager.instituteName }
+                {`Количество ${chartManager.statisticItemName} в ${chartManager.instituteName}`}
               </div>
               <Bar
                 options={{
@@ -260,7 +265,23 @@ export const MainPage: FC = () => {
       <BlockContentContainer href="platform">
         <div className={styles.platform}>
           <Title title="Платформа" />
-          { screen }
+          <div>
+            <Swiper
+              modules={[Autoplay]}
+              loop
+              autoplay={{ delay: 4000, disableOnInteraction: false }}
+            >
+              <SwiperSlide>
+                <PlatformFirstScreen className={styles.platformSlide} />
+              </SwiperSlide>
+              <SwiperSlide>
+                <PlatformSecondScreen className={styles.platformSlide} />
+              </SwiperSlide>
+              <SwiperSlide>
+                <PlatformThirdScreen className={styles.platformSlide} />
+              </SwiperSlide>
+            </Swiper>
+          </div>
         </div>
       </BlockContentContainer>
       <BlockContentContainer href="feedback">
