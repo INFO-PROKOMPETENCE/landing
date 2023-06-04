@@ -1,21 +1,17 @@
-import { FC, useCallback, useRef } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { A11y, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { BoobleContainer } from "../../components/shared/booble-container";
 import { Divider } from "../../components/shared/divider";
 import {
+  getNextScreen,
   MainImage,
   MegaphoneLogo,
   NaumenLogo,
-  PlatformImage,
   SkblabLogo,
   UcsbLogo,
 } from "../../components/shared/icons";
 import { Title } from "../../components/shared/title";
-import {
-  STATISTICS_MOCK_DATA_INSTITUTES,
-  STATISTICS_MOCK_DATA_SUMMARY,
-} from "../../mock/statiscticsMock";
 import { PROJECTS_MOCK } from "../../mock/projects";
 import { ProjectSlide } from "../../components/shared/project-slide";
 import { BlockContentContainer } from "../../components/shared/block-content-container";
@@ -39,6 +35,8 @@ import {
   Tooltip,
   Title as ChartTitle,
 } from "chart.js";
+import statistic, { Institute } from '../../settings/statistic';
+import { useChartManager } from '../../utils/use-chart-manager';
 
 ChartJS.register(
   CategoryScale,
@@ -49,8 +47,6 @@ ChartJS.register(
   Legend
 );
 
-const labels = ["2017", "2017", "2018", "2019", "2020", "2021", "2022", "2023"];
-
 export const MainPage: FC = () => {
   const googleForm = useRef<HTMLDivElement>(null);
 
@@ -58,16 +54,36 @@ export const MainPage: FC = () => {
     googleForm?.current?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
+  const [chartManager, setChartManager] = useChartManager();
+
   const data: ChartData<"bar", (number | [number, number] | null)[]> = {
-    labels: labels,
+    labels: chartManager.labels,
     datasets: [
       {
-        data: labels.map(() => Math.random() * 1000),
+        data: chartManager.data,
         backgroundColor: "#D2E6F5",
         barPercentage: 0.6,
       },
     ],
   };
+
+  const onSetInstituteName = (institute: Institute) => setChartManager({
+    instituteName: institute.name,
+    statisticItemName: Object.keys(institute.data)[0],
+  });
+
+  const onSetStatisticItemName = (value: string) => setChartManager({
+    instituteName: chartManager.instituteName,
+    statisticItemName: value,
+  });
+
+  const [screen, setScreen] = useState(getNextScreen(-1));
+  useEffect(() => {
+    let screenNumber = 0;
+    setInterval(() => {;
+      setScreen(getNextScreen(++screenNumber));
+    }, 3000);
+  }, [])
 
   return (
     <div className={styles.main}>
@@ -94,22 +110,25 @@ export const MainPage: FC = () => {
           <Title title="Статистика" />
           <div className={styles.boobles}>
             <div className={styles.smallBooblesContainer}>
-              {STATISTICS_MOCK_DATA_INSTITUTES.map(({ title, isActive }) => (
-                <BoobleContainer isActive={isActive} key={title}>
-                  {title}
-                </BoobleContainer>
+              {statistic.institutes.map(institute => (
+                  <div key={institute.name} onClick={() => onSetInstituteName(institute)}>
+                    <BoobleContainer isActive={institute.name === chartManager.instituteName}>
+                      {institute.name}
+                    </BoobleContainer>
+                  </div>
               ))}
             </div>
             <Divider />
             <div className={styles.normalBooblesContainer}>
-              {STATISTICS_MOCK_DATA_SUMMARY.map(
-                ({ title, caption, isActive }) => (
-                  <BoobleContainer key={title + caption} isActive={isActive}>
-                    <NormalBoobleContent
-                      title={title}
-                      caption={caption!}
-                    ></NormalBoobleContent>
-                  </BoobleContainer>
+              {chartManager.statisticItems.map((item) => (
+                  <div key={item.title + item.count} onClick={() => onSetStatisticItemName(item.title)}>
+                    <BoobleContainer  isActive={item.title === chartManager.statisticItemName}>
+                      <NormalBoobleContent
+                        title={item.count.toString()}
+                        caption={item.title}
+                      ></NormalBoobleContent>
+                    </BoobleContainer>
+                  </div>
                 )
               )}
             </div>
@@ -117,7 +136,7 @@ export const MainPage: FC = () => {
           <div className={styles.chartContainer}>
             <div className={styles.chart}>
               <div className={styles.chartTitle}>
-                Количество студентов в ИРИТ-РТФ
+                { 'Количество ' + chartManager.statisticItemName + ' в ' + chartManager.instituteName }
               </div>
               <Bar
                 options={{
@@ -241,7 +260,7 @@ export const MainPage: FC = () => {
       <BlockContentContainer href="platform">
         <div className={styles.platform}>
           <Title title="Платформа" />
-          <PlatformImage />
+          { screen }
         </div>
       </BlockContentContainer>
       <BlockContentContainer href="feedback">

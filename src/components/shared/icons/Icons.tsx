@@ -9,6 +9,12 @@ import naumenLogo from "./img/naumen.svg";
 import megaphoneLogo from "./img/megaphone.svg";
 import ucsbLogo from "./img/ucsb.svg";
 import platform from "./img/platform.svg";
+import platformFirstScreen from "./img/screen-1.png";
+import platformSecondScreen from "./img/screen-2.png";
+import platformThirdScreen from "./img/screen-3.png";
+import keyboardProject from "./img/keyboard-saga-project.png";
+import plasmotronProject from "./img/plasmatron-project.png";
+import geneticProject from "./img/genetic-project.png";
 import styles from "./icons.module.scss";
 
 interface Props {
@@ -50,10 +56,22 @@ export const MainImage: FC<Props> = ({ className }) => {
 export const TempChart: FC<Props> = ({ className }) => {
   return <img src={tempChart} alt="" className={className} />;
 };
-
-export const TempProjectPreview: FC<Props> = ({ className }) => {
+export const GenerateImageProjectPreview: FC<Props> = ({ className }) => {
   return <img src={tempProjPrev} alt="" className={className} />;
 };
+
+export const KeyboardProjectPreview: FC<Props> = ({ className }) => {
+  return <img src={keyboardProject} alt="" className={className} />;
+};
+
+export const PlasmotronProjectPreview: FC<Props> = ({ className }) => {
+  return <img src={plasmotronProject} alt="" className={className} />;
+};
+
+export const GeneticProjectPreview: FC<Props> = ({ className }) => {
+  return <img src={geneticProject} alt="" className={className} />;
+};
+
 export const UcsbLogo: FC<Props> = ({ className }) => {
   return <img src={ucsbLogo} alt="" className={className} />;
 };
@@ -69,3 +87,21 @@ export const SkblabLogo: FC<Props> = ({ className }) => {
 export const PlatformImage: FC<Props> = ({ className }) => {
   return <img src={platform} alt="" className={className} />;
 };
+
+export const PlatformFirstScreen: FC<Props> = ({ className }) => {
+  return <img src={platformFirstScreen} alt="" className={className} />;
+};
+
+export const PlatformSecondScreen: FC<Props> = ({ className }) => {
+  return <img src={platformSecondScreen} alt="" className={className} />;
+};
+
+export const PlatformThirdScreen: FC<Props> = ({ className }) => {
+  return <img src={platformThirdScreen} alt="" className={className} />;
+};
+
+export const getNextScreen = (screen: number) => {
+  if (screen % 3 === 0) return <PlatformSecondScreen className={styles.screenshot} />;
+  if (screen % 3 === 1) return <PlatformThirdScreen className={styles.screenshot} />;
+  return <PlatformFirstScreen className={styles.screenshot} />;
+}
