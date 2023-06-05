@@ -337,45 +337,6 @@ export const MainPage: FC = () => {
           </div>
         </div>
       </BlockContentContainer>
-      <BlockContentContainer href="feedback">
-        <div className={styles.feedbackContainer}>
-          <Title title="Отзывы" />
-          <div>
-            <Swiper
-              modules={[Navigation, Pagination, A11y]}
-              loop
-              centeredSlidesBounds
-              slidesPerView={2}
-              navigation={{
-                prevEl: `.${styles.feedbackPrev}`,
-                nextEl: `.${styles.feedbackNext}`,
-              }}
-              pagination={{
-                el: "#feedback-pagination",
-                renderBullet: (index, className) => {
-                  return `<button class="${className} custom-pagination"></button>`;
-                },
-              }}
-            >
-              {FEEDBACK.map(({ job, name, value }, index) => (
-                <SwiperSlide key={index}>
-                  <FeedbackSlide job={job} name={name} value={value} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <div
-              className={styles.paginationContainer}
-              id="feedback-pagination"
-            />
-            <button
-              className={cx(styles.navigateButton, styles.feedbackPrev)}
-            />
-            <button
-              className={cx(styles.navigateButton, styles.feedbackNext)}
-            />
-          </div>
-        </div>
-      </BlockContentContainer>
       <BlockContentContainer href="business">
         <div className={styles.howToBusiness}>
           <Title title="Как стать партнером" />

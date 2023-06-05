@@ -14,13 +14,10 @@ export const Footer: FC = () => {
       <div className={styles.wrapper}>
         <div className={styles.content}>
           <div className={styles.hrefs}>
-            <a href="https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md">
+            <a href="mailto: m.a.shesterov@urfu.ru">
               Почта
             </a>
-            <a href="https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md">
-              Телеграм
-            </a>
-            <a href="https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md">
+            <a href="https://vk.com/project__it" target="_blank">
               Вконтакте
             </a>
           </div>
