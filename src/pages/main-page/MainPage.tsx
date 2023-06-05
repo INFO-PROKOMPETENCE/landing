@@ -225,21 +225,21 @@ export const MainPage: FC = () => {
       </BlockContentContainer>
       <BlockContentContainer href="projects">
         <div className={styles.studentProjectsContainer}>
-          <Title title="Проекты наших студентов" />
+          <div className={styles.projectTitle}>
+            <Title title="Проекты наших студентов" />
+          </div>
           <div>
             <Swiper
               modules={[Navigation, Pagination, A11y]}
               centeredSlides
               loop
-              spaceBetween={48}
               watchOverflow
-              slidesPerView={1.5}
+              slidesPerView={2}
               navigation={{
                 prevEl: `.${styles.prev}`,
                 nextEl: `.${styles.next}`,
               }}
               pagination={{
-                clickable: true,
                 type: "bullets",
                 el: "#project-pagination",
                 renderBullet: (index, className) => {
@@ -251,14 +251,16 @@ export const MainPage: FC = () => {
               {PROJECTS_MOCK.map(
                 ({ description, goal, icon, title }, index) => (
                   <SwiperSlide key={index + title}>
-                    <ProjectSlide
-                      data={{
-                        description,
-                        goal,
-                        icon,
-                        title,
-                      }}
-                    />
+                    <div className={styles.projectSlideWrapper}>
+                      <ProjectSlide
+                        data={{
+                          description,
+                          goal,
+                          icon,
+                          title,
+                        }}
+                      />
+                    </div>
                   </SwiperSlide>
                 )
               )}

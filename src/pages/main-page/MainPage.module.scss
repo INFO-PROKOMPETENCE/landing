@@ -134,6 +134,26 @@
     display: flex;
     flex-direction: column;
     gap: 36px;
+    margin: 0 calc((100vw - 1200px) / 2 * -1);
+
+    :global(.swiper-slide) {
+      filter: blur(4px);
+      transition: 0.5s;
+    }
+
+    :global(.swiper-slide-active) {
+      filter: blur(0);
+      transition: 0.5s;
+    }
+
+    .projectTitle {
+      margin: 0 calc((100vw - 1200px) / 2);
+    }
+
+    .projectSlideWrapper {
+      display: flex;
+      justify-content: center;
+    }
 
     .navigation {
       display: flex;
@@ -147,6 +167,9 @@
         gap: 32px;
         justify-content: center;
         width: fit-content;
+        > * {
+          cursor: default;
+        }
       }
 
       .navigateButton {
