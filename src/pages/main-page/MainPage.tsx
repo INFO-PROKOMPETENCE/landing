@@ -345,14 +345,12 @@ export const MainPage: FC = () => {
               modules={[Navigation, Pagination, A11y]}
               loop
               centeredSlidesBounds
-              // spaceBetween={24}
               slidesPerView={2}
               navigation={{
-                prevEl: `.${styles.prev}`,
-                nextEl: `.${styles.next}`,
+                prevEl: `.${styles.feedbackPrev}`,
+                nextEl: `.${styles.feedbackNext}`,
               }}
               pagination={{
-                clickable: true,
                 el: "#feedback-pagination",
                 renderBullet: (index, className) => {
                   return `<button class="${className} custom-pagination"></button>`;
@@ -369,8 +367,12 @@ export const MainPage: FC = () => {
               className={styles.paginationContainer}
               id="feedback-pagination"
             />
-            <button className={cx(styles.navigateButton, styles.prev)} />
-            <button className={cx(styles.navigateButton, styles.next)} />
+            <button
+              className={cx(styles.navigateButton, styles.feedbackPrev)}
+            />
+            <button
+              className={cx(styles.navigateButton, styles.feedbackNext)}
+            />
           </div>
         </div>
       </BlockContentContainer>

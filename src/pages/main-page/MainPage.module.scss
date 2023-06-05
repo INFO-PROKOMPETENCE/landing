@@ -167,6 +167,7 @@
         gap: 32px;
         justify-content: center;
         width: fit-content;
+
         > * {
           cursor: default;
         }
@@ -242,11 +243,11 @@
       background-color: #ffffff;
       cursor: pointer;
 
-      &.prev {
+      &.feedbackPrev {
         left: -51px;
       }
 
-      &.next {
+      &.feedbackNext {
         right: 0px;
         rotate: 180deg;
       }
@@ -257,6 +258,10 @@
       gap: 32px;
       justify-content: center;
       margin-top: 28px;
+
+      > * {
+        cursor: default;
+      }
     }
   }
 
