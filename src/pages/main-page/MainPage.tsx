@@ -19,8 +19,6 @@ import { ProjectSlide } from "../../components/shared/project-slide";
 import { BlockContentContainer } from "../../components/shared/block-content-container";
 import statistic, { Institute } from "../../settings/statistic";
 import { useChartManager } from "../../utils/use-chart-manager";
-import { FEEDBACK } from "../../mock/feedbackMock";
-import { FeedbackSlide } from "../../components/shared/feedback-slide";
 import { GoogleForm } from "../../components/shared/google-form";
 import { Bar } from "react-chartjs-2";
 import cx from "classnames";
@@ -57,6 +55,7 @@ ChartJS.register(
 
 export const MainPage: FC = () => {
   const [chartManager, setChartManager] = useChartManager();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, takeScreenshot] = useScreenshot();
   const chartRef = useRef<HTMLDivElement>(null);
 
@@ -236,8 +235,8 @@ export const MainPage: FC = () => {
               watchOverflow
               slidesPerView={2}
               navigation={{
-                prevEl: `.${styles.prev}`,
-                nextEl: `.${styles.next}`,
+                prevEl: `#projects-prev`,
+                nextEl: `#projects-next`,
               }}
               pagination={{
                 type: "bullets",
@@ -266,12 +265,18 @@ export const MainPage: FC = () => {
               )}
             </Swiper>
             <div className={styles.navigation}>
-              <button className={cx(styles.navigateButton, styles.prev)} />
+              <button
+                id="projects-prev"
+                className={cx(styles.navigateButton, styles.prev)}
+              />
               <div
                 className={styles.paginationContainer}
                 id="project-pagination"
               />
-              <button className={cx(styles.navigateButton, styles.next)} />
+              <button
+                id="projects-next"
+                className={cx(styles.navigateButton, styles.next)}
+              />
             </div>
           </div>
         </div>

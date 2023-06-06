@@ -27,9 +27,6 @@ export const Header: FC<Props> = ({ activeTab, changeTab, onClickLogo }) => {
           <AnchorLink offset={40} href="#platform">
             Платформа
           </AnchorLink>
-          <AnchorLink offset={40} href="#feedback">
-            Отзывы
-          </AnchorLink>
           <AnchorLink offset={40} href="#business">
             Как стать партнером
           </AnchorLink>
