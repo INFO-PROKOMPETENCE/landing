@@ -1,3 +1,3 @@
 export enum ROUTES {
-  MAIN_PAGE = "/",
+  MAIN_PAGE = "/landing",
 }
